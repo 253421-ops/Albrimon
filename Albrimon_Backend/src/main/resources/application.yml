@@ -1,0 +1,33 @@
+server:
+  port: ${PORT:8080}
+  address: 0.0.0.0
+spring:
+  application:
+    name: albrimon-api
+  datasource:
+    url: jdbc:sqlite:${DB_FILE:./data/albrimon.db}?foreign_keys=on
+    driver-class-name: org.sqlite.JDBC
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+  jackson:
+    time-zone: UTC
+app:
+  jwt:
+    # Replace with a random secret of at least 32 characters before real use.
+    secret: ${JWT_SECRET:local-development-secret-change-this-32-chars-minimum}
+    expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+  cors:
+    allowed-origin: ${CORS_ALLOWED_ORIGIN:http://localhost:5173}
+  bootstrap:
+    designer:
+      name: ${BOOTSTRAP_DESIGNER_NAME:}
+      email: ${BOOTSTRAP_DESIGNER_EMAIL:}
+      password: ${BOOTSTRAP_DESIGNER_PASSWORD:}
